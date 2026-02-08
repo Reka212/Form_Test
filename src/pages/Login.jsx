@@ -1,42 +1,49 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // 🔽 [NAVIGATE] import
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // 🔽 [VALIDASI] state error
   const [error, setError] = useState("");
 
-  const navigate = useNavigate(); // 🔽 [NAVIGATE] init
+  const navigate = useNavigate();
+  const labelStyle = {
+  display: "block",
+  textAlign: "left",
+  marginBottom: "4px",
+};
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // 🔽 [VALIDASI] field wajib
+    // VALIDASI WAJIB
     if (!email || !password) {
       setError("Email dan password wajib diisi");
       return;
     }
 
-    // 🔽 [VALIDASI] format email
+    // VALIDASI EMAIL
     if (!email.includes("@")) {
       setError("Format email tidak valid");
       return;
     }
 
-    // 🔽 [VALIDASI] panjang password
+    // VALIDASI PASSWORD
     if (password.length < 6) {
       setError("Password minimal 6 karakter");
       return;
     }
 
-    // 🔽 [VALIDASI] lolos semua
+    // LOGIN SUKSES
     setError("");
 
-    // 🔽 [NAVIGATE] simulasi login sukses
-    alert(`Login berhasil\nEmail: ${email}`);
-    navigate("/dashboard"); // 👉 ganti sesuai route tujuan
+    // 🔐 SIMPAN STATUS LOGIN
+    localStorage.setItem("isLogin", "true");
+    localStorage.setItem("email", email); // optional
+
+    navigate("/dashboard");
   };
 
   return (
@@ -49,6 +56,7 @@ function Login() {
         alignItems: "center",
         backgroundColor: "#1f1f1f",
       }}
+
     >
       <div
         style={{
@@ -61,31 +69,30 @@ function Login() {
       >
         <h2 style={{ textAlign: "center" }}>Login</h2>
 
-        {/* 🔽 [VALIDASI] tampilkan pesan error */}
         {error && (
-          <p style={{ color: "red", fontSize: "14px", textAlign: "center" }}>
+          <p style={{ color: "red", textAlign: "left", fontSize: "14px" }}>
             {error}
           </p>
         )}
 
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: "10px" }}>
-            <label>Email</label>
+           <label style={labelStyle}>Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              style={{ width: "93%", padding: "8px" }}
+              style={{ width: "100%", padding: "8px" }}
             />
           </div>
 
           <div style={{ marginBottom: "15px" }}>
-            <label>Password</label>
+          <label style={labelStyle}>Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              style={{ width: "93%", padding: "8px" }}
+              style={{ width: "100%", padding: "8px" }}
             />
           </div>
 
@@ -97,17 +104,17 @@ function Login() {
               backgroundColor: "#000",
               color: "#fff",
               border: "none",
+              cursor: "pointer",
             }}
           >
             Login
           </button>
         </form>
 
-        {/* 🔽 [NAVIGATE] TOMBOL REGISTER */}
         <p style={{ textAlign: "center", marginTop: "15px" }}>
           Belum punya akun?{" "}
           <span
-            onClick={() => navigate("/register")} // 🔽 [NAVIGATE]
+            onClick={() => navigate("/register")}
             style={{ color: "#4da6ff", cursor: "pointer" }}
           >
             Register

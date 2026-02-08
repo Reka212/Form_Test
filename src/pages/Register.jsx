@@ -6,7 +6,11 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+ const labelStyle = {
+  display: "block",
+  textAlign: "left",
+  marginBottom: "4px",
+};
   // 🔽 [VALIDASI] state error
   const [error, setError] = useState("");
 
@@ -94,42 +98,42 @@ function Register() {
 
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: "10px" }}>
-            <label>Nama</label>
+          <label style={labelStyle}>Nama</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              style={{ width: "93%", padding: "8px" }}
+              style={{ width: "100%", padding: "8px" }}
             />
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <label>Email</label>
+          <label style={labelStyle}>Email</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              style={{ width: "93%", padding: "8px" }}
+              style={{ width: "100%", padding: "8px" }}
             />
           </div>
 
           <div style={{ marginBottom: "10px" }}>
-            <label>Password</label>
+           <label style={labelStyle}>Password</label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              style={{ width: "93%", padding: "8px" }}
+              style={{ width: "100%", padding: "8px" }}
             />
           </div>
 
           <div style={{ marginBottom: "15px" }}>
-            <label>Konfirmasi Password</label>
+          <label style={labelStyle}>Konfirmasi Password</label>
             <input
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              style={{ width: "93%", padding: "8px" }}
+              style={{ width: "100%", padding: "8px" }}
             />
           </div>
 
