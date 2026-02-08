@@ -1,11 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // 🔽 [NAVIGATE] import
 
-function Login({ onSwitch }) {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // 🔽 [VALIDASI] state error
   const [error, setError] = useState("");
+
+  const navigate = useNavigate(); // 🔽 [NAVIGATE] init
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +19,7 @@ function Login({ onSwitch }) {
       return;
     }
 
-    // 🔽 [VALIDASI] format email sederhana
+    // 🔽 [VALIDASI] format email
     if (!email.includes("@")) {
       setError("Format email tidak valid");
       return;
@@ -30,7 +33,10 @@ function Login({ onSwitch }) {
 
     // 🔽 [VALIDASI] lolos semua
     setError("");
+
+    // 🔽 [NAVIGATE] simulasi login sukses
     alert(`Login berhasil\nEmail: ${email}`);
+    navigate("/dashboard"); // 👉 ganti sesuai route tujuan
   };
 
   return (
@@ -97,11 +103,11 @@ function Login({ onSwitch }) {
           </button>
         </form>
 
-        {/* 🔽 TOMBOL REGISTER */}
+        {/* 🔽 [NAVIGATE] TOMBOL REGISTER */}
         <p style={{ textAlign: "center", marginTop: "15px" }}>
           Belum punya akun?{" "}
           <span
-            onClick={onSwitch}
+            onClick={() => navigate("/register")} // 🔽 [NAVIGATE]
             style={{ color: "#4da6ff", cursor: "pointer" }}
           >
             Register

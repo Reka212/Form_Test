@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Dashboard from "./components/Dashboard";
 
 function App() {
-  const [page, setPage] = useState("login");
-
   return (
-    <>
-      {page === "login" ? (
-        <Login onSwitch={() => setPage("register")} />
-      ) : (
-        <Register onSwitch={() => setPage("login")} />
-      )}
-    </>
+    <Routes>
+      {/* default */}
+      <Route path="/" element={<Navigate to="/login" />} />
+
+      {/* auth */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Routes>
   );
 }
 

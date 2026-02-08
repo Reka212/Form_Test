@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // 🔽 [NAVIGATE] import
 
-function Register({ onSwitch }) {
+function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -8,6 +9,8 @@ function Register({ onSwitch }) {
 
   // 🔽 [VALIDASI] state error
   const [error, setError] = useState("");
+
+  const navigate = useNavigate(); // 🔽 [NAVIGATE] init
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -52,7 +55,10 @@ function Register({ onSwitch }) {
 
     // 🔽 [VALIDASI] lolos semua
     setError("");
+
+    // 🔽 [NAVIGATE] simulasi register sukses
     alert(`Register berhasil\nNama: ${name}\nEmail: ${email}`);
+    navigate("/login"); // 👉 redirect ke login
   };
 
   return (
@@ -142,11 +148,11 @@ function Register({ onSwitch }) {
           </button>
         </form>
 
-        {/* 🔽 TOMBOL BALIK KE LOGIN */}
+        {/* 🔽 [NAVIGATE] TOMBOL BALIK KE LOGIN */}
         <p style={{ textAlign: "center", marginTop: "15px" }}>
           Sudah punya akun?{" "}
           <span
-            onClick={onSwitch}
+            onClick={() => navigate("/login")} // 🔽 [NAVIGATE]
             style={{ color: "#4da6ff", cursor: "pointer" }}
           >
             Login
